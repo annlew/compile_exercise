@@ -1,0 +1,31 @@
+# Program
+NAME=hello_world
+
+# Targets 
+TARGET=$(NAME).x
+
+# Objects
+OBJ=$(NAME).o
+
+# Source
+SRC=$(NAME).f90
+
+# Fortran compiler
+FC=ifort
+
+# Linker
+LD=$(FC)
+
+# Compiler flags
+FFLAGS=-O2 -r8 
+
+all:$(TARGET)
+
+clean:
+	rm -f *.o *.x
+
+$(TARGET): $(OBJ)
+	$(LD) -o $(TARGET) $(OBJ)
+
+$(OBJ): $(SRC)	
+	$(FC) -c $(SRC)

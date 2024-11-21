@@ -1,0 +1,34 @@
+# Program
+NAME=hello_nc_world
+
+# Targets 
+TARGET=$(NAME).x
+
+# Objects
+OBJ=$(NAME).o
+
+# Source
+SRC=$(NAME).f90
+
+# Fortran compiler
+FC=ifort
+
+# Linker
+LD=$(FC)
+
+# Libraries
+LIBS= -L${NETCDF_DIR}/lib -lnetcdff -lnetcdf
+
+# Compiler flags
+FFLAGS=-O2 -r8 -I$(NETCDF_DIR)/include 
+
+all:$(TARGET)
+
+clean:
+	rm -f *.o *.x
+
+$(TARGET): $(OBJ)
+	$(LD) -o $(TARGET) $(OBJ) $(LIBS)
+
+$(OBJ): $(SRC)	
+	$(FC) ${FFLAGS} -c $(SRC)
